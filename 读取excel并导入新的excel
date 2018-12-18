@@ -1,0 +1,17 @@
+from openpyxl import Workbook ##加载workbook
+wb = Workbook() ##打开workbook
+ws = wb.active ##激活工作簿
+ws1 = wb.get_sheet_by_name(wb.sheetnames[0])
+ws1.title='qingkuang'
+
+##读取一个文件
+from openpyxl import load_workbook ##加载loadbook
+wb2 = load_workbook('C:/Users/lzdata/Desktop/20181213李宁项目首批子公司信息收集表（北京）.xlsx') ##读取EXCEL
+print(wb2.sheetnames) ##显示表名称
+sheet_1 = wb2['商品分区配置']
+# ws1=wb.copy_worksheet(sheet_1)
+for i in  range(sheet_1.max_row):
+    for j in range(sheet_1.max_column):
+        ws1.cell(row=i+1, column=j+1, value=sheet_1.cell(row=i+1,column=j+1).value)
+wb.save('C:/Users/lzdata/Desktop/save_data.xlsx') ##存储工作表
+wb.close() ##关闭该文件
